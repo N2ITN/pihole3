@@ -40,8 +40,8 @@ RUN sudo rm -r ./pi-hole
 RUN git clone https://github.com/pi-hole/AdminLTE.git
 RUN mkdir /var/www/html/admin
 RUN mv ./AdminLTE /var/www/html/admin
-RUN mv ./AdminLTE_version.txt /etc/
-RUN mv ./pi-hole_version.txt /etc/
+COPY ./AdminLTE_version.txt /etc/
+COPY ./pi-hole_version.txt /etc/
 
 # #     Make pihole scripts fail searching for `systemctl`,
 # # which fails pretty miserably in docker compared to `service`
