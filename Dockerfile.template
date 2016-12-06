@@ -50,6 +50,12 @@ RUN mv ./docker-pi-hole/pi-hole_version.txt /etc/
 # # For more info see docker/docker issue #7459
 RUN mv `which systemctl` /bin/no_systemctl
 
+##DEBUG
+
+RUN ls /var/www/html/admin/ 
+##/DEBUG
+
+
 ENV WEBLOGDIR /var/log/lighttpd
 RUN mkdir -p /etc/pihole/ && \
     mkdir -p /var/www/html/pihole && \
