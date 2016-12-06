@@ -13,10 +13,10 @@ RUN sudo apt-get install -y \
         php5-common php5-cgi php5 \
         bc curl unzip wget sudo dnsutils && \
     rm -rf /var/cache/apt/archives
-# RUN sudo apt-get install git
-# RUN git clone https://github.com/pi-hole/pi-hole.git
-
-COPY . ./
+RUN sudo apt-get install git
+RUN git clone https://github.com/pi-hole/pi-hole.git
+RUN ls pi-hole
+# COPY . ./
 # # Original upstream pihole code being used
 RUN mv ./pi-hole/gravity.sh /usr/local/bin/
 # COPY ./pi-hole/adlists.default /etc/pihole/
