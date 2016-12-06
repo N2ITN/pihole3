@@ -2,6 +2,6 @@
   path = docker-pi-hole 
   url = https://github.com/diginc/docker-pi-hole.git
 
-  [submodule "pi-hole"] 
-  path = pi-hole 
-  url = https://github.com/pi-hole/pi-hole.git
+[submodule "pi-hole"] 
+path = pi-hole 
+url = https://github.com/pi-hole/pi-hole.git
