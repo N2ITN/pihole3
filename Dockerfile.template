@@ -18,7 +18,7 @@ RUN sudo apt-get install -y \
 
 COPY . ./
 # # Original upstream pihole code being used
-RUN mv pi-hole/gravity.sh /usr/local/bin/
+RUN mv ./pi-hole/gravity.sh /usr/local/bin/
 # COPY ./pi-hole/adlists.default /etc/pihole/
 # COPY ./pi-hole/adlists.default /etc/.pihole/
 # COPY ./pi-hole/pihole /usr/local/bin/
