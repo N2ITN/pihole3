@@ -41,7 +41,7 @@ RUN git clone https://github.com/pi-hole/AdminLTE.git
 RUN mkdir /var/www/html/admin
 RUN mv ./AdminLTE /var/www/html/admin
 COPY . ./
-RUN ls ./
+RUN ls ./docker-pi-hole 
 RUN mv ./docker-pi-hole/AdminLTE_version.txt /etc/
 RUN mv ./docker-pi-hole/pi-hole_version.txt /etc/
 
