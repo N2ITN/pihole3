@@ -15,24 +15,24 @@ RUN sudo apt-get install -y \
     rm -rf /var/cache/apt/archives
 RUN sudo apt-get install git
 RUN git clone https://github.com/pi-hole/pi-hole.git
-RUN ls pi-hole
+
 # COPY . ./
 # # Original upstream pihole code being used
 RUN mv ./pi-hole/gravity.sh /usr/local/bin/
-# COPY ./pi-hole/adlists.default /etc/pihole/
-# COPY ./pi-hole/adlists.default /etc/.pihole/
-# COPY ./pi-hole/pihole /usr/local/bin/
-# COPY ./pi-hole/advanced/Scripts/* /usr/local/bin/
-# RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
-# COPY ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
-# COPY ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
-# COPY ./pi-hole/advanced/01-pihole.conf /etc/dnsmasq.d/
-# COPY ./pi-hole/advanced/index* /var/www/html/pihole/
+RUN mv ./pi-hole/adlists.default /etc/pihole/
+RUN mv ./pi-hole/adlists.default /etc/.pihole/
+RUN mv ./pi-hole/pihole /usr/local/bin/
+RUN mv ./pi-hole/advanced/Scripts/* /usr/local/bin/
+RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
+RUN mv ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
+RUN mv ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
+RUN mv ./pi-hole/advanced/01-pihole.conf /etc/dnsmasq.d/
+RUN mv ./pi-hole/advanced/index* /var/www/html/pihole/
 # RUN rm /var/www/html/index.lighttpd.html
-# COPY ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
-# COPY ./AdminLTE /var/www/html/admin
-# COPY ./AdminLTE_version.txt /etc/
-# COPY ./pi-hole_version.txt /etc/
+# RUN mv ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
+# RUN mv ./AdminLTE /var/www/html/admin
+# RUN mv ./AdminLTE_version.txt /etc/
+# RUN mv ./pi-hole_version.txt /etc/
 # #     Make pihole scripts fail searching for `systemctl`,
 # # which fails pretty miserably in docker compared to `service`
 # # For more info see docker/docker issue #7459
