@@ -29,6 +29,7 @@ RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
 RUN mv ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
 RUN mv ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
 RUN mv ./pi-hole/advanced/01-pihole.conf /etc/dnsmasq.d/
+RUN mkdir /var/www/html/pihole/
 RUN mv ./pi-hole/advanced/index* /var/www/html/pihole/
 # RUN rm /var/www/html/index.lighttpd.html
 # RUN mv ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
