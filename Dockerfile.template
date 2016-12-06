@@ -16,7 +16,7 @@ RUN sudo apt-get install -y \
 # RUN sudo apt-get install git
 # RUN git clone https://github.com/pi-hole/pi-hole.git
 COPY . ./
-RUN ls ./pi-hole
+RUN ls pi-hole
 # # Original upstream pihole code being used
 # COPY ./pi-hole/gravity.sh /usr/local/bin/
 # COPY ./pi-hole/adlists.default /etc/pihole/
