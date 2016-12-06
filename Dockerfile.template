@@ -5,7 +5,7 @@ MAINTAINER adam@diginc.us <adam@diginc.us>
 # ENV IMAGE debian
 
 # Requirements
-RUN apt-get -q update 
+RUN apt-get  update 
 RUN apt-get install -y \
         dnsmasq \
         lighttpd \
