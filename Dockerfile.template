@@ -34,9 +34,12 @@ RUN mv ./pi-hole/advanced/index* /var/www/html/pihole/
 RUN rm /var/www/html/index.lighttpd.html
 RUN mkdir /etc/sudoers.d/pihole
 RUN mv ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
-# RUN mv ./AdminLTE /var/www/html/admin
-# RUN mv ./AdminLTE_version.txt /etc/
-# RUN mv ./pi-hole_version.txt /etc/
+
+RUN git clone https://github.com/pi-hole/AdminLTE.git
+RUN mkdir /var/www/html/admin
+RUN mv ./AdminLTE /var/www/html/admin
+RUN mv ./AdminLTE_version.txt /etc/
+RUN mv ./pi-hole_version.txt /etc/
 # #     Make pihole scripts fail searching for `systemctl`,
 # # which fails pretty miserably in docker compared to `service`
 # # For more info see docker/docker issue #7459
