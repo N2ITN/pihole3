@@ -1,3 +1,5 @@
+### NOTE
+# git commit -a -m 'updates'  && git push; git push resin master
 FROM resin/rpi-raspbian
 
 # RUN [ "cross-build-start" ]
@@ -11,7 +13,7 @@ RUN sudo apt-get install -y \
         php5-common php5-cgi php5 \
         bc curl unzip wget sudo dnsutils && \
     rm -rf /var/cache/apt/archives
-
+RUN git clone https://github.com/pi-hole/pi-hole.git
 # Original upstream pihole code being used
 COPY ./pi-hole/gravity.sh /usr/local/bin/
 COPY ./pi-hole/adlists.default /etc/pihole/
