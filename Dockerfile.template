@@ -2,7 +2,7 @@
 # see more about dockerfile templates here:http://docs.resin.io/pages/deployment/docker-templates
 FROM resin/rpi-raspbian
 
-
+RUN apt-get install curl
 RUN curl -L install.pi-hole.net | bash
 WORKDIR /usr/src/app
 ENV INITSYSTEM on
