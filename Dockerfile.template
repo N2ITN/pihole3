@@ -4,6 +4,7 @@ FROM resin/rpi-raspbian:jessie
 
 RUN curl -L install.pi-hole.net | bash
 WORKDIR /usr/src/app
+COPY . ./
 ENV INITSYSTEM on
 # CMD ["python", "-m", "SimpleHTTPServer","80"]
 CMD [""]
