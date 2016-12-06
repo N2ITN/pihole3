@@ -1,0 +1,11 @@
+# base-image for python on any machine using a template variable,
+# see more about dockerfile templates here:http://docs.resin.io/pages/deployment/docker-templates
+FROM resin/rpi-raspbian
+
+
+RUN curl -L install.pi-hole.net | bash
+WORKDIR /usr/src/app
+ENV INITSYSTEM on
+# CMD ["python", "-m", "SimpleHTTPServer","80"]
+CMD [""]
+
