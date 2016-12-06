@@ -13,7 +13,8 @@ RUN sudo apt-get install -y \
         php5-common php5-cgi php5 \
         bc curl unzip wget sudo dnsutils && \
     rm -rf /var/cache/apt/archives
-RUN git clone https://github.com/pi-hole/pi-hole.git
+# RUN sudo ap-get install git
+# RUN git clone https://github.com/pi-hole/pi-hole.git
 
 # # Original upstream pihole code being used
 # COPY ./pi-hole/gravity.sh /usr/local/bin/
@@ -74,5 +75,4 @@ RUN git clone https://github.com/pi-hole/pi-hole.git
 # # Tini doesn't work in ARM
 # ENTRYPOINT [ "bash", "-c" ]
 # CMD [ "/start.sh" ]
-
-# RUN [ "cross-build-end" 
+ 
