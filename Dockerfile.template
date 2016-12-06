@@ -18,11 +18,11 @@ RUN sudo apt-get install -y \
 COPY . ./
 RUN ls ./pi-hole
 # # Original upstream pihole code being used
-COPY ./pi-hole/gravity.sh /usr/local/bin/
-COPY ./pi-hole/adlists.default /etc/pihole/
-COPY ./pi-hole/adlists.default /etc/.pihole/
-COPY ./pi-hole/pihole /usr/local/bin/
-COPY ./pi-hole/advanced/Scripts/* /usr/local/bin/
+# COPY ./pi-hole/gravity.sh /usr/local/bin/
+# COPY ./pi-hole/adlists.default /etc/pihole/
+# COPY ./pi-hole/adlists.default /etc/.pihole/
+# COPY ./pi-hole/pihole /usr/local/bin/
+# COPY ./pi-hole/advanced/Scripts/* /usr/local/bin/
 # RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
 # COPY ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
 # COPY ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
