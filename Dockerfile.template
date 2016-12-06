@@ -1,7 +1,7 @@
 FROM jsurf/rpi-raspbian
 MAINTAINER adam@diginc.us <adam@diginc.us>
 
-RUN [ "cross-build-start" ]
+# RUN [ "cross-build-start" ]
 ENV IMAGE debian
 
 # Requirements
