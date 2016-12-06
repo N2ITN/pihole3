@@ -16,7 +16,7 @@ RUN sudo apt-get install -y \
 # RUN sudo apt-get install git
 # RUN git clone https://github.com/pi-hole/pi-hole.git
 COPY . ./
-WORKDIR ./pi-hole
+
 RUN ls -a
 # # Original upstream pihole code being used
 # COPY ./pi-hole/gravity.sh /usr/local/bin/
