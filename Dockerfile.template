@@ -19,6 +19,7 @@ RUN git clone https://github.com/pi-hole/pi-hole.git
 # COPY . ./
 # # Original upstream pihole code being used
 RUN mv ./pi-hole/gravity.sh /usr/local/bin/
+RUN mkdir /etc/pihole/
 RUN mv ./pi-hole/adlists.default /etc/pihole/
 RUN mv ./pi-hole/adlists.default /etc/.pihole/
 RUN mv ./pi-hole/pihole /usr/local/bin/
