@@ -14,64 +14,65 @@ RUN sudo apt-get install -y \
         bc curl unzip wget sudo dnsutils && \
     rm -rf /var/cache/apt/archives
 RUN git clone https://github.com/pi-hole/pi-hole.git
-# Original upstream pihole code being used
-COPY ./pi-hole/gravity.sh /usr/local/bin/
-COPY ./pi-hole/adlists.default /etc/pihole/
-COPY ./pi-hole/adlists.default /etc/.pihole/
-COPY ./pi-hole/pihole /usr/local/bin/
-COPY ./pi-hole/advanced/Scripts/* /usr/local/bin/
-RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
-COPY ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
-COPY ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
-COPY ./pi-hole/advanced/01-pihole.conf /etc/dnsmasq.d/
-COPY ./pi-hole/advanced/index* /var/www/html/pihole/
-RUN rm /var/www/html/index.lighttpd.html
-COPY ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
-COPY ./AdminLTE /var/www/html/admin
-COPY ./AdminLTE_version.txt /etc/
-COPY ./pi-hole_version.txt /etc/
-#     Make pihole scripts fail searching for `systemctl`,
-# which fails pretty miserably in docker compared to `service`
-# For more info see docker/docker issue #7459
-RUN mv `which systemctl` /bin/no_systemctl
 
-ENV WEBLOGDIR /var/log/lighttpd
-RUN mkdir -p /etc/pihole/ && \
-    mkdir -p /var/www/html/pihole && \
-    mkdir -p /var/www/html/admin/ && \
-    chown www-data:www-data /var/www/html && \
-    touch ${WEBLOGDIR}/access.log ${WEBLOGDIR}/error.log && \
-    chown -R www-data.www-data ${WEBLOGDIR} && \
-    chmod 775 /var/www/html && \
-    lighty-enable-mod fastcgi fastcgi-php || true && \
-    touch /var/log/pihole.log && \
-    chmod 644 /var/log/pihole.log && \
-    chown dnsmasq:root /var/log/pihole.log && \
-    sed -i "s/@INT@/eth0/" /etc/dnsmasq.d/01-pihole.conf && \
-    sed -i 's|"cd /etc/.pihole/ && git describe --tags --abbrev=0"|"cat /etc/pi-hole_version.txt"|g' /var/www/html/admin/footer.php && \
-    sed -i 's|"git describe --tags --abbrev=0"|"cat /etc/AdminLTE_version.txt"|g' /var/www/html/admin/footer.php
+# # Original upstream pihole code being used
+# COPY ./pi-hole/gravity.sh /usr/local/bin/
+# COPY ./pi-hole/adlists.default /etc/pihole/
+# COPY ./pi-hole/adlists.default /etc/.pihole/
+# COPY ./pi-hole/pihole /usr/local/bin/
+# COPY ./pi-hole/advanced/Scripts/* /usr/local/bin/
+# RUN mkdir -p /opt/ && ln -s /usr/local/bin /opt/pihole
+# COPY ./pi-hole/advanced/lighttpd.conf.debian /etc/lighttpd/lighttpd.conf
+# COPY ./pi-hole/advanced/dnsmasq.conf.original /etc/dnsmasq.conf
+# COPY ./pi-hole/advanced/01-pihole.conf /etc/dnsmasq.d/
+# COPY ./pi-hole/advanced/index* /var/www/html/pihole/
+# RUN rm /var/www/html/index.lighttpd.html
+# COPY ./pi-hole/advanced/pihole.sudo /etc/sudoers.d/pihole
+# COPY ./AdminLTE /var/www/html/admin
+# COPY ./AdminLTE_version.txt /etc/
+# COPY ./pi-hole_version.txt /etc/
+# #     Make pihole scripts fail searching for `systemctl`,
+# # which fails pretty miserably in docker compared to `service`
+# # For more info see docker/docker issue #7459
+# RUN mv `which systemctl` /bin/no_systemctl
 
-# This chould be eliminated if all (upstream) files were +x in git
-RUN chmod +x /usr/local/bin/*.sh
+# ENV WEBLOGDIR /var/log/lighttpd
+# RUN mkdir -p /etc/pihole/ && \
+#     mkdir -p /var/www/html/pihole && \
+#     mkdir -p /var/www/html/admin/ && \
+#     chown www-data:www-data /var/www/html && \
+#     touch ${WEBLOGDIR}/access.log ${WEBLOGDIR}/error.log && \
+#     chown -R www-data.www-data ${WEBLOGDIR} && \
+#     chmod 775 /var/www/html && \
+#     lighty-enable-mod fastcgi fastcgi-php || true && \
+#     touch /var/log/pihole.log && \
+#     chmod 644 /var/log/pihole.log && \
+#     chown dnsmasq:root /var/log/pihole.log && \
+#     sed -i "s/@INT@/eth0/" /etc/dnsmasq.d/01-pihole.conf && \
+#     sed -i 's|"cd /etc/.pihole/ && git describe --tags --abbrev=0"|"cat /etc/pi-hole_version.txt"|g' /var/www/html/admin/footer.php && \
+#     sed -i 's|"git describe --tags --abbrev=0"|"cat /etc/AdminLTE_version.txt"|g' /var/www/html/admin/footer.php
 
-# Fix dnsmasq in docker
-RUN grep -q '^user=root' || echo 'user=root' >> /etc/dnsmasq.conf
+# # This chould be eliminated if all (upstream) files were +x in git
+# RUN chmod +x /usr/local/bin/*.sh
 
-# php config start passes special ENVs into
-ENV PHP_ENV_CONFIG '/etc/lighttpd/conf-enabled/15-fastcgi-php.conf'
-ENV PHP_ERROR_LOG '/var/log/lighttpd/error.log'
-COPY ./start.sh /
-COPY ./bash_functions.sh /
+# # Fix dnsmasq in docker
+# RUN grep -q '^user=root' || echo 'user=root' >> /etc/dnsmasq.conf
 
-# IPv6 disable flag for networks/devices that do not support it
-# not fully supported in debian yet
-ENV IPv6 True
+# # php config start passes special ENVs into
+# ENV PHP_ENV_CONFIG '/etc/lighttpd/conf-enabled/15-fastcgi-php.conf'
+# ENV PHP_ERROR_LOG '/var/log/lighttpd/error.log'
+# COPY ./start.sh /
+# COPY ./bash_functions.sh /
 
-EXPOSE 53 53/udp
-EXPOSE 80
+# # IPv6 disable flag for networks/devices that do not support it
+# # not fully supported in debian yet
+# ENV IPv6 True
 
-# Tini doesn't work in ARM
-ENTRYPOINT [ "bash", "-c" ]
-CMD [ "/start.sh" ]
+# EXPOSE 53 53/udp
+# EXPOSE 80
 
-RUN [ "cross-build-end" 
+# # Tini doesn't work in ARM
+# ENTRYPOINT [ "bash", "-c" ]
+# CMD [ "/start.sh" ]
+
+# RUN [ "cross-build-end" 
