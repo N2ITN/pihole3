@@ -5,8 +5,8 @@ MAINTAINER adam@diginc.us <adam@diginc.us>
 # ENV IMAGE debian
 
 # Requirements
-RUN apt-get  update 
-RUN apt-get install -y \
+RUN sudo apt-get  update 
+RUN sudo apt-get install -y \
         dnsmasq \
         lighttpd \
         php5-common php5-cgi php5 \
